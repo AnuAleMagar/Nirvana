@@ -35,7 +35,6 @@ function GeminiApi() {
         contents: `Generate 1 short, original meditation quote. It should be under 20 words, calming, inspiring, and encourage mindfulness.Output Format :“In stillness, we meet the most honest version of ourselves.”
 `,
       });
-      console.log(response.text);
       setAiResponse(cleanResponse(response.text));
       setIsLoading(false);
     } catch (error) {

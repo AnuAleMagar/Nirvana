@@ -1,32 +1,68 @@
-import React from "react";
-
+import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase";
+import { AuthContext } from "../AuthContext";
 function Login() {
+  const [loginUser, setLoginUser] = useState({ email: "", password: "" });
+  const navigate = useNavigate();
+  const {login}=useContext(AuthContext)
+  function handleChange(e) {
+    let obj = { ...loginUser, [e.target.name]: e.target.value };
+    setLoginUser(obj);
+  }
+  async function handleSubmit(e) {
+    e.preventDefault();
+    if (loginUser.password == "") {
+      alert("Passwords field is empty");
+      return;
+    }
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        loginUser.email,
+        loginUser.password
+      );
+      const firebaseUser=userCredential.user;
+      const token=await firebaseUser.getIdToken();
+      localStorage.setItem('token',token)
+      login();
+      navigate("/dashboard"); // or wherever you want to redirect
+    } catch (error) {
+      alert(error.message);
+    }
+  }
   return (
     <div className="flex items-center justify-center w-full h-[calc(100vh-4rem)] relative">
-      {/* Background image with opacity */}
       <div className="absolute inset-0 bg-[url('/meditation2.jpg')] bg-contain bg-center bg-no-repeat opacity-30"></div>
-      <div className="relative z-10 flex flex-col space-y-4 w-[300px] h-[300px] bg-[url('/meditation2.jpg')] bg-cover bg-center rounded-lg shadow-lg p-6 pt-10 mt-12 ml-5 opacity-75  rounded-3xl">
+      <div className="relative z-10 flex flex-col space-y-4 w-[300px] h-[300px] bg-[url('/meditation2.jpg')] bg-cover bg-center rounded-3xl shadow-lg p-6 pt-10 mt-12 ml-5 opacity-75  rounded-3xl">
         <h1 className="text-xl font-bold text-white text-center">Welcome!</h1>
-     <input
-  type="text"
-  placeholder="Email"
-  className="bg-transparent border border-white/80 rounded-md p-2 text-white placeholder-white/70"
-/>
+        <input
+          type="text"
+          name="email"
+          value={loginUser.email}
+          onChange={handleChange}
+          placeholder="Email"
+          className="bg-transparent border border-white/80 rounded-3xl p-2 text-white placeholder-white/70"
+        />
         <input
           type="password"
+          name="password"
+          value={loginUser.password}
+          onChange={handleChange}
           placeholder="Password"
-          className="bg-white/20 backdrop-blur-md border border-white/40 rounded-xl p-2 text-white placeholder-white/70"
+          className="bg-transparent  border border-white/80 rounded-3xl p-2 text-white placeholder-white/70"
         />
         <button
           type="submit"
-          className="bg-blue-500 hover:bg-blue-600 text-white rounded-xl py-2"
+          onClick={handleSubmit}
+          className="bg-blue-500/50 hover:bg-blue-600 text-white rounded-3xl py-2"
         >
-          Login
+          LOGIN
         </button>
       </div>
     </div>
   );
 }
-// ...existing code...
 
 export default Login;

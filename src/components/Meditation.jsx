@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function Meditation() {
+function Meditation({setSession,setTotalTime}) {
   const [time, setTime] = useState("00:00:05");
   const [intervalId, setIntervalId] = useState(null);
   function handleTime(minutesToAdd) {
@@ -27,12 +27,13 @@ function Meditation() {
         setIntervalId(null);
     } // prevent multiple intervals
      else{
-          const id = setInterval(() => {
+    const id = setInterval(() => {
       setTime((prevTime) => {
         const [h, m, s] = prevTime.split(":").map(Number);
         let totalSeconds = h * 3600 + m * 60 + s;
-
+           setTotalTime(prevTotal=>prevTotal+1)
         if (totalSeconds <= 0) {
+            setSession((prevSession)=>prevSession+1)
           clearInterval(id);
           setIntervalId(null);
           return "00:00:00";

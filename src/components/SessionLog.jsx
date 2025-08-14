@@ -1,6 +1,6 @@
 import React from "react";
 import Streak from "./Streak";
-function SessionLog() {
+function SessionLog({session,totalTime}) {
   return (
     <div>
       <Streak />
@@ -13,11 +13,11 @@ function SessionLog() {
     {/* Stats */}
     <div className="flex gap-4 pb-6 pt-3 ">
       <div className="bg-blue-100 rounded-lg p-4 flex flex-col items-center justify-center w-80 h-24">
-        <h1 className="font-bold text-lg">0</h1>
+        <h1 className="font-bold text-lg">{session}</h1>
         <p className="text-center">Total Session</p>
       </div>
       <div className="bg-blue-100 rounded-lg p-4 flex flex-col items-center justify-center w-80 h-24">
-        <h1 className="font-bold text-lg ">0</h1>
+        <h1 className="font-bold text-lg ">{Math.floor(totalTime/60)}</h1>
         <p className="text-center">Minutes Practiced</p>
       </div>
     </div>

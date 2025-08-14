@@ -14,7 +14,7 @@ function Homepage() {
             <li>Maintain streaks to build a daily habit</li>
             <li>Enjoy soothing, personalized music to enhance your experience</li>
           </ul>
-          <a href="/login"> <button className="bg-blue-400 text-white font-semibold px-6 py-2 rounded hover:bg-blue-500 w-max">
+          <a href="/login"> <button className="bg-blue-400 text-white font-semibold px-6 py-2 rounded-3xl hover:bg-blue-500 w-max">
             Login
           </button></a>
          
