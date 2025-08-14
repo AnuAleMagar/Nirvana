@@ -33,7 +33,6 @@ export const AuthContextProvider = ({ children }) => {
     .then(() => {
       setIsLoggedIn(false);
       localStorage.removeItem("token");
-      // Optionally, clear other user state here
     })
     .catch((error) => {
       alert("Logout failed: " + error.message);

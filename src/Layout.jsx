@@ -1,10 +1,10 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import Navbar from "./components/Navbar";
-function Layout() {
+function Layout({streak}) {
   return (
     <>
-      <Navbar />
+      <Navbar streak={streak} />
       <main>
         <Outlet />
       </main>

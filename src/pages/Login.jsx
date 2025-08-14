@@ -27,7 +27,7 @@ function Login() {
       const token=await firebaseUser.getIdToken();
       localStorage.setItem('token',token)
       login();
-      navigate("/dashboard"); // or wherever you want to redirect
+      navigate("/dashboard"); 
     } catch (error) {
       alert(error.message);
     }

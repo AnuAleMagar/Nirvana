@@ -1,4 +1,4 @@
-// src/firebaseClient.js
+
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
@@ -14,13 +14,10 @@ const firebaseConfig = {
   measurementId: "G-YV6K0L8TSZ"
 };
 
-// Initialize Firebase and rename the app variable
 const appAuth = initializeApp(firebaseConfig);
 
-// Optional analytics
 export const analytics = getAnalytics(appAuth);
 
-// Firebase services
 export const auth = getAuth(appAuth);
 export const db = getFirestore(appAuth);
 

@@ -1,13 +1,15 @@
 import { useState } from "react";
 
-function Meditation({setSession,setTotalTime}) {
-  const [time, setTime] = useState("00:00:05");
+function Meditation({handleCreateSession}) {
+  const [time, setTime] = useState("00:00:60");
   const [intervalId, setIntervalId] = useState(null);
+    const [elapsedSeconds, setElapsedSeconds] = useState(60);
   function handleTime(minutesToAdd) {
     setTime((prevTime) => {
       const [h, m, s] = prevTime.split(":").map(Number);
       const totalSeconds = h * 3600 + m * 60 + s;
       const newTotal = totalSeconds + minutesToAdd * 60;
+      setElapsedSeconds(newTotal)
 
       const newH = Math.floor(newTotal / 3600)
         .toString()
@@ -31,16 +33,15 @@ function Meditation({setSession,setTotalTime}) {
       setTime((prevTime) => {
         const [h, m, s] = prevTime.split(":").map(Number);
         let totalSeconds = h * 3600 + m * 60 + s;
-           setTotalTime(prevTotal=>prevTotal+1)
+          
         if (totalSeconds <= 0) {
-            setSession((prevSession)=>prevSession+1)
+        handleCreateSession(elapsedSeconds)
+        setElapsedSeconds(0)
           clearInterval(id);
           setIntervalId(null);
           return "00:00:00";
         }
-
-        totalSeconds -= 1; // decrease 1 second
-
+          totalSeconds -= 1;
         const newH = Math.floor(totalSeconds / 3600)
           .toString()
           .padStart(2, "0");

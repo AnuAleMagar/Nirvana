@@ -1,14 +1,13 @@
 import React from "react";
 import { useContext } from "react";
 import { AuthContext } from "../AuthContext";
-function Navbar() {
+function Navbar({streak}) {
   const {isLoggedIn,logout}=useContext(AuthContext)
   return (
     <div>
       <nav className="sticky top-0 relative bg-white shadow-lg after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-white/10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
-            {/* LEFT SIDE — Logo + Nirvana */}
             <div className="flex items-center space-x-3">
               <a href="/"><img src="/logo.png" alt="Your Company" className="h-12 w-auto" /></a>
               <span
@@ -18,10 +17,7 @@ function Navbar() {
                 Nirvana
               </span>
             </div>
-
-            {/* RIGHT SIDE — Menu + Profile */}
              {isLoggedIn?  <div className="flex items-center  space-x-6">
-              {/* Navigation Links */}
               <div className="hidden sm:flex mr-16 space-x-4">
                 <a
                   href="#"
@@ -49,21 +45,16 @@ function Navbar() {
                 </a>
               </div>
 
-              {/* Profile Picture */}
-              {/* RIGHT SIDE — Streak + Dark Mode + Profile */}
               <div className="flex items-center space-x-1 ml-16">
-                {/* If in public folder, just use /filename */}
                 <img
                   src="/streak.png"
                   alt="Streak"
                   className="h-5 w-4"
                 />
-                <span className="text-sm font-medium">4</span>
+                <span className="text-sm font-medium">{streak}</span>
               </div>
 
-              {/* Dark Mode Toggle */}
               <div className="flex items-center space-x-1">
-                {/* If in public folder, just use /filename */}
                 <img
                   src="/theme.png"
                   alt="theme"
@@ -71,7 +62,6 @@ function Navbar() {
                 />
               </div>
 
-              {/* Profile Picture */}
               <button className="relative flex rounded-full focus:outline-none">
                 <img
                   src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
@@ -85,7 +75,6 @@ function Navbar() {
                   Logout
                 </button>
             </div>:<div className="flex items-center  space-x-6">
-              {/* Navigation Links */}
               <div className="hidden sm:flex space-x-4">
                 <a
                   href="/login"
