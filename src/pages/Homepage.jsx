@@ -1,4 +1,6 @@
 import React from "react";
+import { useContext } from "react";
+import { ThemeContext } from "../ThemeContext";
 function Homepage() {
   return (
     <div className="bg-[#FFF4F3] flex items-center justify-center p-6"  style={{ height: "calc(100vh - 64px)" }}>

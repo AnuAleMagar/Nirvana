@@ -5,7 +5,7 @@ function Layout({streak}) {
   return (
     <>
       <Navbar streak={streak} />
-      <main>
+      <main className="max-w-5xl mx-auto">
         <Outlet />
       </main>
     </>

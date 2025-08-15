@@ -9,9 +9,11 @@ import Dashboard from "./pages/Dashboard";
 import Layout from "./Layout";
 import { AuthContext } from "./AuthContext";
 import ProtectedRoute from "./ProtectedRoute";
+
 function App() {
   const [streak, setStreak] = useState(0);
   const {isLoggedIn}=useContext(AuthContext)
+
   return (
     <BrowserRouter>
       <Routes>

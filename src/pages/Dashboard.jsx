@@ -1,15 +1,18 @@
 import React,{useState,useEffect} from 'react'
+import { useContext } from 'react'
 import GeminiApi from '../GeminiApi'
 import Meditation from '../components/Meditation'
 import SessionLog from '../components/SessionLog'
 import { addDoc, collection } from "firebase/firestore";
 import {  query, where, onSnapshot } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
+import { ThemeContext } from '../ThemeContext'
 import { db } from "../firebase";
 const date = new Date().toISOString().split("T")[0];
 function Dashboard({streak,setStreak}) {
   const [totalSessions, setTotalSessions] = useState(0);
 const [totalDuration, setTotalDuration] = useState(0);
+  const {isDark}=useContext(ThemeContext)
   async function handleCreateSession(duration){
       const auth=getAuth();
       const user=auth.currentUser;
@@ -54,7 +57,8 @@ useEffect(() => {
 }, []);
 
   return (
-    <div className='bg-[#FFF4F3]'>
+<div className={`${isDark ? "bg-[#1A1A1A] text-white" : "bg-[#FFF4F3] text-black"}`}>
+
     <GeminiApi />
     <Meditation handleCreateSession={handleCreateSession}/>
     <SessionLog  session={totalSessions} totalTime={totalDuration} streak={streak} setStreak={setStreak}/>

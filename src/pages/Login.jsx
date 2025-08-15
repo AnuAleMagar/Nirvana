@@ -3,7 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { AuthContext } from "../AuthContext";
+import { ThemeContext } from "../ThemeContext";
 function Login() {
+  const {isDark}=useContext(ThemeContext)
   const [loginUser, setLoginUser] = useState({ email: "", password: "" });
   const navigate = useNavigate();
   const {login}=useContext(AuthContext)
@@ -33,10 +35,10 @@ function Login() {
     }
   }
   return (
-    <div className="flex items-center justify-center w-full h-[calc(100vh-4rem)] relative">
-      <div className="absolute inset-0 bg-[url('/meditation2.jpg')] bg-contain bg-center bg-no-repeat opacity-30"></div>
+    <div className="flex items-center justify-center h-[calc(100vh-4rem)] relative">
+      <div className="absolute top-0 inset-0 bg-[url('/meditation2.jpg')] bg-cover bg-center bg-no-repeat opacity-30"></div>
       <div className="relative z-10 flex flex-col space-y-4 w-[300px] h-[300px] bg-[url('/meditation2.jpg')] bg-cover bg-center rounded-3xl shadow-lg p-6 pt-10 mt-12 ml-5 opacity-75  rounded-3xl">
-        <h1 className="text-xl font-bold text-white text-center">Welcome!</h1>
+        <h1 className="text-2xl font-bold  text-[#CC5500] text-center">Welcome!</h1>
         <input
           type="text"
           name="email"

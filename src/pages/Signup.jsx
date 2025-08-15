@@ -41,7 +41,7 @@ try {
   }
   return (
     <form onSubmit={handleSubmit} className="flex items-center justify-center w-full h-[calc(100vh-4rem)] relative">
-      <div className="absolute inset-0 bg-[url('/meditation2.jpg')] bg-contain bg-center bg-no-repeat opacity-30"></div>
+      <div className="absolute inset-0 bg-[url('/meditation2.jpg')] bg-cover bg-center bg-no-repeat opacity-30"></div>
       <div className="relative z-10 flex flex-col space-y-4 w-[350px] h-[400px] bg-[url('/meditation2.jpg')] bg-cover bg-center rounded-3xl shadow-lg p-6 pt-10 mt-12 ml-5 opacity-75  rounded-3xl">
         <h1 className="text-xl font-bold text-white text-center">Signup!</h1>
         <input

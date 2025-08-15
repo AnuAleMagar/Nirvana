@@ -1,18 +1,32 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ThemeContext } from "../ThemeContext";
 
-function Streak({streak}) {
+function Streak({ streak }) {
+  const { isDark } = useContext(ThemeContext);
+
   return (
-<div className="bg-orange-500 h-[160px] w-[1000px] flex flex-col items-center justify-center p-6 rounded-2xl mx-auto p-5">
-  <div className="flex items-center gap-4">
-    <img src="/streakwhite.png" alt="firestreak" className="h-7 w-" />
-    <h1 className="font-bold text-lg text-white">Current Streak</h1>
-  </div>
-  <button className="bg-white text-orange-500 px-4 py-1 rounded-md font-bold mt-2">
-    {streak}
-  </button>
-  <p className="text-white mt-2">days in a row</p>
-</div>
+    <div
+      className={`h-[160px] w-[86%] flex flex-col items-center justify-center rounded-2xl mx-auto p-5 transition-colors duration-300
+        ${isDark ? "bg-orange-800" : "bg-orange-500"}`}
+    >
+      <div className="flex items-center gap-4">
+        <img
+          src={isDark ? "/streakwhite.png" : "/streakwhite.png"}
+          alt="firestreak"
+          className="h-7 w-7"
+        />
+        <h1 className="font-bold text-lg text-white">Current Streak</h1>
+      </div>
 
+      <button
+        className={`px-4 py-1 rounded-md font-bold mt-2 transition-colors duration-300
+          ${isDark ? "bg-white-900 text-white-400" : "bg-white text-orange-500"}`}
+      >
+        {streak}
+      </button>
+
+      <p className="text-white mt-2">days in a row</p>
+    </div>
   );
 }
 

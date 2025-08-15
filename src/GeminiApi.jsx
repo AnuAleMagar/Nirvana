@@ -1,10 +1,15 @@
 import { React, useState } from "react";
 import { useEffect } from "react";
 import { GoogleGenAI } from "@google/genai";
+import { useContext } from "react";
+import { ThemeContext } from "./ThemeContext";
 const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
 const ai = new GoogleGenAI({ apiKey });
 
+
+
 function GeminiApi() {
+    const {isDark}=useContext(ThemeContext)
   const [aiResponse, setAiResponse] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const cleanResponse = (text) => {
@@ -46,8 +51,18 @@ function GeminiApi() {
     handleGemini()
   },[]);
   return (
-  <div className="flex flex-col items-center justify-start  pt-12 space-y-4 ">
-  <div className="w-full max-w-2xl p-16 border border-gray-300 rounded-[50px] bg-white shadow-sm font-bold italic focus-within:ring-2 focus-within:ring-blue-400 mt-20 mb-5 ">
+ <div
+  className={`flex flex-col items-center justify-start pt-12 space-y-4 ${
+    isDark ? "bg-gray-900 text-gray-100" : "bg-[#FFF4F3] text-gray-900"
+  }`}
+>
+  <div
+    className={`w-full max-w-2xl p-16 rounded-[50px] shadow-sm font-bold mt-20 rouge-script-regular mb-5 transition-colors duration-300
+      ${isDark
+        ? "bg-gray-800 border border-gray-700 focus-within:ring-2 focus-within:ring-blue-500"
+        : "bg-white border border-gray-300 focus-within:ring-2 focus-within:ring-blue-400"
+      }`}
+  >
     {aiResponse}
   </div>
 
